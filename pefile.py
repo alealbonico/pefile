@@ -1109,14 +1109,6 @@ class SectionStructure(Structure):
         VirtualAddress_adj = self.pe.adjust_SectionAlignment( self.VirtualAddress,
             self.pe.OPTIONAL_HEADER.SectionAlignment, self.pe.OPTIONAL_HEADER.FileAlignment )
 
-        # Check whether there's any section after the current one that starts before the
-        # calculated end for the current one. If so, cut the current section's size
-        # to fit in the range up to where the next section starts.
-        if (self.next_section_virtual_address is not None and
-            self.next_section_virtual_address > self.VirtualAddress and
-            VirtualAddress_adj + size > self.next_section_virtual_address):
-                size = self.next_section_virtual_address - VirtualAddress_adj
-
         return VirtualAddress_adj <= rva < VirtualAddress_adj + size
 
 
