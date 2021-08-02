@@ -4323,23 +4323,23 @@ class PE(object):
         return resources_strings
 
 
-    def get_data(self, rva=0, length=None):
-        """Get data regardless of the section where it lies on.
+    # def get_data(self, rva=0, length=None):
+    #    """Get data regardless of the section where it lies on.
 
-        Given a RVA and the size of the chunk to retrieve, this method
-        will find the section where the data lies and return the data.
-        """
+    #    Given a RVA and the size of the chunk to retrieve, this method
+    #    will find the section where the data lies and return the data.
+    #    """
 
-        s = self.get_section_by_rva(rva)
+        # s = self.get_section_by_rva(rva)
 
-        if length:
-            end = rva + length
-        else:
-            end = None
+        # if length:
+        #     end = rva + length
+        # else:
+        #     end = None
 
-        if not s:
-            if rva < len(self.header):
-                return self.header[rva:end]
+        # if not s:
+        #     if rva < len(self.header):
+        #         return self.header[rva:end]
 
             # Before we give up we check whether the file might
             # contain the data anyway. There are cases of PE files
@@ -4350,12 +4350,12 @@ class PE(object):
             # MD5: 0008892cdfbc3bda5ce047c565e52295
             # SHA-1: c7116b9ff950f86af256defb95b5d4859d4752a9
             #
-            if rva < len(self.__data__):
-                return self.__data__[rva:end]
+        #    if rva < len(self.__data__):
+        #        return self.__data__[rva:end]
 
-            raise PEFormatError('data at RVA can\'t be fetched. Corrupt header?')
+        #     raise PEFormatError('data at RVA can\'t be fetched. Corrupt header?')
 
-        return s.get_data(rva, length)
+        # return s.get_data(rva, length)
 
 
     def get_rva_from_offset(self, offset):
