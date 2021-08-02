@@ -3887,15 +3887,6 @@ class PE(object):
         import_descs =  []
         error_count = 0
         while True:
-            try:
-                # If the RVA is invalid all would blow up. Some EXEs seem to be
-                # specially nasty and have an invalid RVA.
-                data = self.get_data(rva, Structure(
-                        self.__IMAGE_IMPORT_DESCRIPTOR_format__).sizeof() )
-            except PEFormatError as e:
-                self.__warnings.append(
-                    'Error parsing the import directory at RVA: 0x%x' % ( rva ) )
-                break
 
             file_offset = self.get_offset_from_rva(rva)
             import_desc =  self.__unpack_data__(
