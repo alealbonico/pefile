@@ -1004,6 +1004,16 @@ class SectionStructure(Structure):
 
         Structure.__init__(self, *argl, **argd)
 
+
+    def get_VirtualAddress_adj(self):
+        if self.VirtualAddress_adj is None:
+            if self.VirtualAddress is not None:
+                self.VirtualAddress_adj = self.pe.adjust_SectionAlignment(self.VirtualAddress,
+                                                                          self.pe.OPTIONAL_HEADER.SectionAlignment,
+                                                                          self.pe.OPTIONAL_HEADER.FileAlignment)
+        return self.VirtualAddress_adj
+
+
     def get_data(self, start=None, length=None):
         """Get data chunk from a section.
 
