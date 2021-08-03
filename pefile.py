@@ -1003,6 +1003,7 @@ class SectionStructure(Structure):
             del argd['pe']
 
         Structure.__init__(self, *argl, **argd)
+        self.VirtualAddress_adj = None
 
 
     def get_VirtualAddress_adj(self):
